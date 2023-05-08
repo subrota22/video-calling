@@ -1,0 +1,59 @@
+
+<html>
+<head>
+    <style>
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        #root {
+            width: 100%;
+            height: 100%;
+        }
+        .title{font-size: 25px; color: rgb(7, 23, 143);
+        text-align: center; font-weight: bold; margin: 22px 22px;}
+    </style>
+    <title>Life line health strams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Nerko+One&family=Raleway:wght@300;400&family=Roboto:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/logoDoctor.png" type="image/x-icon">
+</head>
+
+
+<body>
+ <marquee>
+    <div class="title">Welcome to the lifeline health, live video Streams.</div>
+ </marquee>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+    // Generate a Kit Token by calling a method.
+    // @param 1: appID
+    // @param 2: serverSecret
+    // @param 3: Room ID = sing in id 
+    // @param 4: User ID
+    // @param 5: Username
+    const roomID = "ac6a451620f1a6bd95c6ac837a8221290dd7fe64d027e1e84b70ad7dcb105ee8";
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "userName" + userID;
+    const appID = 333327147;
+    const serverSecret = "e6a9ae79df72d25dc5fc2a546c3283cc";
+    const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+
+
+    const zp = ZegoUIKitPrebuilt.create(kitToken);
+    zp.joinRoom({
+        container: document.querySelector("#root"),
+        sharedLinks: [{
+            url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+        }],
+        scenario: {
+           mode: ZegoUIKitPrebuilt.GroupCall, //  To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
+        },
+
+    });
+</script>
+
+</html>
